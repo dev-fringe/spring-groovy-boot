@@ -15,6 +15,7 @@
 	<description>spring-groovy intergration</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>dev.fringe.WebApplication</start-class>		
 	</properties>
 	<dependencies>
 		<dependency>
