@@ -63,15 +63,15 @@ public class MainConfig {
         return new SqlSessionTemplate(s);
     }
 	
-	@Bean
-	DataSourceInitializer dataSourceInitializer(@Qualifier('dataSource') DataSource d) {
-	    ResourceDatabasePopulator p = new ResourceDatabasePopulator();
-	    p.addScript(new ClassPathResource('/data.sql'));
-	    DataSourceInitializer i = new DataSourceInitializer();
-	    i.setDataSource(d);
-	    i.setDatabasePopulator(p);
-	    return i;
-	}
+//	@Bean
+//	DataSourceInitializer dataSourceInitializer(@Qualifier('dataSource') DataSource d) {
+//	    ResourceDatabasePopulator p = new ResourceDatabasePopulator();
+//	    p.addScript(new ClassPathResource('/data.sql'));
+//	    DataSourceInitializer i = new DataSourceInitializer();
+//	    i.setDataSource(d);
+//	    i.setDatabasePopulator(p);
+//	    return i;
+//	}
 	@Bean
 	LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean l = new LocalSessionFactoryBean();
