@@ -41,7 +41,7 @@ public class MainConfig {
     private String password;
 
     @Bean
-    public DataSource dataSource() {
+    DataSource dataSource() {
     	HikariConfig c = new HikariConfig();
     	c.setDriverClassName(driverClassName);
     	c.setJdbcUrl(url);
@@ -51,7 +51,7 @@ public class MainConfig {
     }
     
     @Bean
-    public SqlSessionFactory sqlSessionFactory(@Qualifier('dataSource') DataSource d) throws Exception {
+    SqlSessionFactory sqlSessionFactory(@Qualifier('dataSource') DataSource d) throws Exception {
         SqlSessionFactoryBean s = new SqlSessionFactoryBean();
         s.setDataSource(d);
         s.setTypeAliasesPackage('dev.fringe.model');
@@ -59,12 +59,12 @@ public class MainConfig {
     }
 
     @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory s) {
+    SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory s) {
         return new SqlSessionTemplate(s);
     }
 	
 	@Bean
-	public DataSourceInitializer dataSourceInitializer(@Qualifier('dataSource') DataSource d) {
+	DataSourceInitializer dataSourceInitializer(@Qualifier('dataSource') DataSource d) {
 	    ResourceDatabasePopulator p = new ResourceDatabasePopulator();
 	    p.addScript(new ClassPathResource('/data.sql'));
 	    DataSourceInitializer i = new DataSourceInitializer();
@@ -73,7 +73,7 @@ public class MainConfig {
 	    return i;
 	}
 	@Bean
-	public LocalSessionFactoryBean getSessionFactory() {
+	LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean l = new LocalSessionFactoryBean();
 		l.setDataSource(dataSource());
 		l.setPackagesToScan("dev.fringe.model");
@@ -86,7 +86,7 @@ public class MainConfig {
 	
 	@Bean(name = "transactionManager")
 	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory s) {
+	HibernateTransactionManager transactionManager(SessionFactory s) {
 		HibernateTransactionManager t = new HibernateTransactionManager();
 		t.setSessionFactory(s);
 		return t;
